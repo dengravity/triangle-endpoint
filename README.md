@@ -3,7 +3,7 @@ This repository contains automated tests for the Triangle Calculator REST API us
 
 ## Prerequisites
 
-- **Node.js**
+- **Node.js (v.20+)**
 - **npm**
 
 ## Installation
