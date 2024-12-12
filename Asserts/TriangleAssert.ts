@@ -1,111 +1,42 @@
-import { Response, expect } from '@playwright/test';
+import { Response } from '@playwright/test';
+import { CommonAssert } from './CommonAssert';
 
 
-export class TriangleAssert {
+export class TriangleAssert extends CommonAssert {
 
-    async expectEquilateral(response: Response) {
-        const status = response.status();
-        const responseBody = await response.json();
-        try {
-            expect(status).toEqual(200);
-            expect(responseBody).toEqual({ result: "This is equilateral triangle" });
-        }
-        catch {
-            throw new Error(
-                `Expectations are not met. Status: ${status}. Response body: ${JSON.stringify(responseBody)}`
-            );
-        }
+    async expectEquilateral(response: Response): Promise<void> {
+        await this.assertResponse(response, 200, { result: "This is equilateral triangle" });
     }
 
-    async expectIsosceles(response: Response) {
-        const status = response.status();
-        const responseBody = await response.json();
-        try {
-            expect(status).toEqual(200);
-            expect(responseBody).toEqual({ result: "This is isosceles triangle" });
-        }
-        catch {
-            throw new Error(
-                `Expectations are not met. Status: ${status}. Response body: ${JSON.stringify(responseBody)}`
-            );
-        }
+    async expectIsosceles(response: Response): Promise<void> {
+        await this.assertResponse(response, 200, { result: "This is isosceles triangle" });
     }
-    async expectVersatile(response: Response) {
-        const status = response.status();
-        const responseBody = await response.json();
-        try {
-            expect(status).toEqual(200);
-            expect(responseBody).toEqual({ result: "This is versatile triangle" });
-        }
-        catch {
-            throw new Error(
-                `Expectations are not met. Status: ${status}. Response body: ${JSON.stringify(responseBody)}`
-            );
-        }
+    
+    async expectVersatile(response: Response): Promise<void> {
+        await this.assertResponse(response, 200, { result: "This is versatile triangle" });
     }
 
-    async expectErrorGreaterThan0(response: Response) {
-        const status = response.status();
-        const responseBody = await response.json();
-        try {
-            expect(status).toEqual(422);
-            expect(responseBody).toEqual({
-                "error": "All triangle sides should be greater than 0"
-            });
-        }
-        catch {
-            throw new Error(
-                `Expectations are not met. Status: ${status}. Response body: ${JSON.stringify(responseBody)}`
-            );
-        }
+    async expectErrorGreaterThan0(response: Response): Promise<void> {
+        await this.assertResponse(response, 422, {
+            "error": "All triangle sides should be greater than 0"
+        });
     }
 
-    async expectErrorNumericSides(response: Response) {
-        const status = response.status();
-        const responseBody = await response.json();
-        try {
-            expect(status).toEqual(422);
-            expect(responseBody).toEqual({
-                "error": "All triangle sides should be numeric"
-            });
-        }
-        catch {
-            throw new Error(
-                `Expectations are not met. Status: ${status}. Response body: ${JSON.stringify(responseBody)}`
-            );
-        }
+    async expectErrorNumericSides(response: Response): Promise<void> {
+        await this.assertResponse(response, 422, {
+            "error": "All triangle sides should be numeric"
+        });
     }
 
-    async expectErrorSumOf2SidesIsGreater(response: Response) {
-        const status = response.status();
-        const responseBody = await response.json();
-        try {
-            expect(status).toEqual(422);
-            expect(responseBody).toEqual({
-                "error": "Sum of any 2 sides should be greater than the 3rd"
-            });
-        }
-        catch {
-            throw new Error(
-                `Expectations are not met. Status: ${status}. Response body: ${JSON.stringify(responseBody)}`
-            );
-        }
+    async expectErrorSumOf2SidesIsGreater(response: Response): Promise<void> {
+        await this.assertResponse(response, 422, {
+            "error": "Sum of any 2 sides should be greater than the 3rd"
+        });
     }
 
-    async expectShouldHave3Sides(response: Response) {
-        const status = response.status();
-        const responseBody = await response.json();
-        try {
-            expect(status).toEqual(422);
-            expect(responseBody).toEqual({
-                "error": "Triangle should have 3 side"
-            });
-        }
-        catch {
-            throw new Error(
-                `Expectations are not met. Status: ${status}. Response body: ${JSON.stringify(responseBody)}`
-            );
-        }
+    async expectShouldHave3Sides(response: Response): Promise<void> {
+        await this.assertResponse(response, 422, {
+            "error": "Triangle should have 3 side"
+        });
     }
-
 }

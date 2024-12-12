@@ -1,4 +1,4 @@
-export class Triangles {
+export class TrianglesData {
     randomSide() {
         return Math.random() * 1000 + Number.EPSILON;
     }
